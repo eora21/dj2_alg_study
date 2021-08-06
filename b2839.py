@@ -1,13 +1,13 @@
 sugar = int(input())
 
-k = 9999
+k = -1
 
-for i in range((sugar // 3) + 1):
-    for j in range((sugar - (3 * i) // 5) + 1):
-        if sugar == 3 * i + 5 * j and k > i + j:
+for i in range((sugar // 5), -1, -1):
+    for j in range((sugar - (5 * i) // 3) + 1):
+        if sugar == 5 * i + 3 * j:
             k = i + j
+            break
+    if k != -1:
+        break
 
-if k != 9999:
-    print(k)
-else:
-    print(-1)
+print(k)
