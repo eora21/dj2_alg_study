@@ -1,21 +1,14 @@
-import time
-start = time.time()
-
 S = int(input())
 
-N = 0
+total = 0
+cnt = 0
+for i in range(1, S + 1):
+    total += i
+    cnt += 1
+    if total == S:
+        break
+    elif total > S:
+        cnt -= 1
+        break
 
-num = 2 ** (S // 2) + 1
-for i in range(num):
-    binary = bin(i)[2:]
-
-    if binary.count("1") > N:
-        total = 0
-        for p in range(len(binary)):
-            if binary[p] == '1':
-                total += p + 1
-        if total == S:
-            N = binary.count("1")
-
-print(N)
-print("time :", time.time() - start)
+print(cnt)
