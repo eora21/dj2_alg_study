@@ -8,8 +8,8 @@ while True:
 
     if B % 2 == 0:
         B = int(B / 2)
-    elif B != 1 and str(B)[-1] == "1":
-        B = int(str(B)[:-1])
+    elif B != 1 and B % 10 == 1:
+        B = B // 10
     else:
         cnt = -1
         break
