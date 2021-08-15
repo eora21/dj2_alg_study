@@ -10,8 +10,6 @@ for i in range(N):
     w = rope[i] * (i + 1)
 
     if total < w:
-        total  = w
-    else:
-        break
+        total = w
 
 print(int(total))
