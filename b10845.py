@@ -1,36 +1,20 @@
 from sys import stdin
 
-def push(Q, N):
-    Q.append(N)
-
-
-def pop(Q):
-    print(Q.pop(0) if len(Q) else -1)
-
-
-def size(Q):
-    print(len(Q))
-
-
-def empty(Q):
-    print(0 if len(Q) else 1)
-
-
-def front(Q):
-    print(Q[0] if len(Q) else -1)
-
-
-def back(Q):
-    print(Q[-1] if len(Q) else -1)
-
-
-dic = {"pop": pop, "size": size, "empty": empty, "front": front, "back": back}
-
 li = []
+
+dic = dict(
+    push = lambda x: li.append(x),
+    pop = lambda: li.pop(0) if li else -1,
+    size = lambda: len(li),
+    empty = lambda: 0 if li else 1,
+    front = lambda: li[0] if li else -1,
+    back= lambda: li[-1] if li else -1,
+)
+
 
 for _ in range(int(stdin.readline())):
     command = stdin.readline().split()
     if "push" in command:
-        push(li, command[1])
+        dic["push"](command[1])
     else:
-        dic[command[0]](li)
+        print(dic[command[0]]())
