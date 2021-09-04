@@ -9,7 +9,7 @@ for row in range(N):
         if floor[row][col] in arrow.keys():
             delta_y, delta_x = arrow[floor[row][col]]
             cnt = 1
-            while (0 <= row + delta_y * cnt < N and 0 <= col + delta_x * cnt < N) and \
+            while (0 <= row + delta_y * cnt < N and 0 <= col + delta_x * cnt < M) and \
                 floor[row + delta_y * cnt][col + delta_x * cnt] == floor[row][col]:
                 floor[row + delta_y * cnt][col + delta_x * cnt] = "X"
                 cnt += 1
