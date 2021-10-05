@@ -1,12 +1,12 @@
 from typing import Deque
-from sys import stdin
-input = stdin.readline
+import sys
+input = sys.stdin.readline
 
 n = int(input())
 
 stack = Deque()
-i = 1
 op = Deque()
+i = 1
 for _ in range(n):
     num = int(input())
     if i > num and stack[-1] > num:
@@ -19,5 +19,4 @@ for _ in range(n):
     stack.pop()
     op.append("-")
 else:
-    for o in op:
-        print(o)
+    print("\n".join(op))
