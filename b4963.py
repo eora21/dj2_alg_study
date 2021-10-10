@@ -15,10 +15,10 @@ while True:
     for row in range(h):
         for col in range(w):
             if field[row][col]:
-                field[row][col] = 0                
+                field[row][col] = 0
                 cnt += 1
                 rear += 1
-                queue[rear] = (row, col)
+                queue[rear] = [row, col]
 
                 while head < rear:
                     head += 1
@@ -30,7 +30,7 @@ while True:
                             if field[y][x] == 1:
                                 field[y][x] = 0
                                 rear += 1
-                                queue[rear] = (y, x)
+                                queue[rear] = [y, x]
 
     
     print(cnt)
