@@ -2,37 +2,22 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-field = [[] for _ in range(N + 1)]
-for _ in range(N - 1):
+lines = [0 for _ in range(N + 1)]
+two_nodes = [0] * (N - 1)
+
+for i in range(N - 1):
     A, B = map(int, input().split())
-    field[A].append(B)
-    field[B].append(A)
+    two_nodes[i] = (A, B)
+    lines[A] += 1
+    lines[B] += 1
 
-queue = [0] * (N + 1)
-queue[0] = 1
-head = -1
-tail = 0
-check = [True] * (N + 1)
-check[1] = False
-D = 0
-G = 0
+G = D = 0
+for left, right in two_nodes:
+    D += (lines[left] - 1) * (lines[right] - 1)
 
-while head < tail:
-    head += 1
-    now = queue[head]
-    L = len(field[now])
-    
-    if L > 2:
-        G += L * (L - 1) * (L - 2) // 6
-    
-    for child in field[now]:
-        if check[child]:
-            check[child] = False
-            tail += 1
-            queue[tail] = child
-
-            down = len(field[child]) - 1
-            D += (L - 1) * down
+for line in lines:
+    if line >= 3:
+        G += line * (line - 1) * (line - 2) // 6 
 
 ans = "G"
 if D == G * 3:
