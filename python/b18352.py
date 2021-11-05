@@ -1,28 +1,26 @@
-import sys
+import sys, heapq
 input = sys.stdin.readline
 
 N, M, K, X = map(int, input().split())
 field = [[] for _ in range(N + 1)]
 djik = [300001] * (N + 1)
-djik[X] = 0
+HQ = []
+heapq.heappush(HQ, (0, X))
 check = [True] * (N + 1)
 
 for _ in range(M):
     A, B = map(int, input().split())
     field[A].append(B)
 
-for _ in range(N):
-    min_load = 300001
-    target = X
-    for search in range(1, N + 1):
-        if check[search] and djik[search] < min_load:
-            min_load = djik[search]
-            target = search
-    
-    check[target] = False
+while HQ:
+    dist, target = heapq.heappop(HQ)
+    if check[target]:
+        check[target] = False
+        djik[target] = dist
 
-    for to in field[target]:
-        djik[to] = djik[target] + 1 if djik[target] + 1 < djik[to] else djik[to]
+        for to in field[target]:
+            if check[to]:
+                heapq.heappush(HQ, (dist + 1, to))
 
 flag = True
 for city in range(1, N + 1):
@@ -32,5 +30,3 @@ for city in range(1, N + 1):
 
 if flag:
     print(-1)
-
-#시간초과

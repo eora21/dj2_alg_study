@@ -2,14 +2,11 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-S = [input() for _ in range(N)]
-check = [input() for _ in range(M)]
+S = {input() for _ in range(N)}
 
-cnt = 0
-st = "/".join(S)
-for i in range(M):
-    if check[i] in st:
-        cnt += 1
-print(cnt)
+total = 0
+for _ in range(M):
+    if input() in S:
+        total += 1
 
-#시간초과
+print(total)
