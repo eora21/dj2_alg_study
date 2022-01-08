@@ -1,27 +1,31 @@
-def switch(index):
+def switch(b, idx):
+    for step in range(3):
+        if idx + step < N + 1:
+            lights[b][idx + step] ^= 1
+
+
+def check():
     global cnt
-    for i in range(index - 1, index + 2):
-        if 0 <= i < N:
-            lights[i] = 1 - lights[i]
-    cnt += 1
-    print(lights)
+    for b in range(2):
+        cnt = 0
+        for i in range(N):
+            if lights[b][i]:
+                cnt += 1
+                switch(b, i)
+
+        if not lights[b][-1]:
+            return True
 
 
 N = int(input())
 lights_now = list(map(int, input()))
-lights = list(map(int, input()))
+lights_target = list(map(int, input()))
+lights = [[0], [1]]
+
 for i in range(N):
-    lights[i] ^= lights_now[i]
+    b = lights_now[i]^lights_target[i]
+    lights[0].append(b)
+    lights[1].append(b)
 
 cnt = 0
-
-if lights[-1] != lights[-2]:
-    switch(N - 3)
-if lights[0] and ((lights[1] and lights.count(1) % 3) or (not lights[1] and not lights.count(1) % 3)):
-    switch(0)
-
-for i in range(N - 1):
-    if lights[i]:
-        switch(i + 1)
-
-print(-1 if lights[-1] else cnt)
+print(cnt if check() else -1)
